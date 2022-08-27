@@ -2,22 +2,21 @@ import java.util.*;
 class Solution {
     public int singleNumber(int[] nums) {
         int n=nums.length;
-        int i;
-        HashMap<Integer,Integer> map=new HashMap<>();
-        for(i=0;i<n;i++){
-            if(map.containsKey(nums[i])){
-              map.put(nums[i],map.get(nums[i])+1);
-            }
-        else
-                map.put(nums[i],1);
+        int i,j;
+        int c=0,unset=0,ans=0;
+     for(i=0;i<=31;i++){
+         c=0;
+         for(j=0;j<n;j++){
+             if((1&(nums[j]>>i))==1){
+                 c++;
+             }
+         }
+         unset=n-c;
+         if(c%3==1){
+            ans=ans+(1<<i); 
+         }
+     }   
         
+         return ans;      
     }
-        for(i=0;i<n;i++){
-            if(map.get(nums[i])==1){
-                return nums[i];
-            }
-        }
-       return 0;
-    }
-    
 }
